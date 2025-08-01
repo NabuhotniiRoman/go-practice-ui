@@ -4,12 +4,19 @@ metadata:
   name: app-ingress
   namespace: default
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
   - host: myapp.local
     http:
       paths:
+      - path: /api/(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: go-api-service
+            port:
+              number: 8080
       - path: /
         pathType: Prefix
         backend:
@@ -17,10 +24,3 @@ spec:
             name: react-frontend-service
             port:
               number: 80
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
-            name: go-api-service
-            port:
-              number: 8080
