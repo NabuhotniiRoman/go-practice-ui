@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import GoogleButton from './GoogleButton';
+import API_BASE_URL from '../../config/api.js';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -42,7 +43,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   const response = await fetch('/auth/default/login', {
+   const response = await fetch(API_BASE_URL + '/auth/default/login', {
       method: 'POST',
       body: JSON.stringify(formData),
       credentials: 'include',
@@ -67,7 +68,7 @@ const LoginForm = () => {
   console.log("eoeok");
   
   try {
-    const response = await fetch('/auth/login', {
+    const response = await fetch(API_BASE_URL + '/auth/login', {
       method: 'POST',
       credentials: 'include',
       headers: {

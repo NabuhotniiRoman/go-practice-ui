@@ -1,12 +1,17 @@
+import API_BASE_URL from './config/api.js';
+
 const getCookie = (name) => {
   const matches = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
   return matches ? matches[2] : null;
 };
 
 export default async function fetchWithRefresh(url, options = {}) {
-  // Якщо url не починається з http або /, додаємо /
-  if (typeof url === 'string' && !url.startsWith('http') && !url.startsWith('/')) {
-    url = '/' + url;
+  // Якщо url не починається з http, додаємо API_BASE_URL
+  if (typeof url === 'string' && !url.startsWith('http')) {
+    if (!url.startsWith('/')) {
+      url = '/' + url;
+    }
+    url = API_BASE_URL + url;
   }
   let accessToken = getCookie("access_token");
   let refreshToken = getCookie("refresh_token");
@@ -21,7 +26,7 @@ export default async function fetchWithRefresh(url, options = {}) {
 
   if (response.status === 401 && refreshToken) {
     // Спроба оновити токен
-    const refreshResponse = await fetch("/auth/refresh", {
+    const refreshResponse = await fetch(API_BASE_URL + "/auth/refresh", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ refreshToken }),

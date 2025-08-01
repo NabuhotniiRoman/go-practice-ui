@@ -1,14 +1,15 @@
-import { useState } from "react";
-import {
+import { useState } from 'react';
+import { 
   Box,
   Button,
   TextField,
   Typography,
   Container,
   Paper,
-  Link,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+  Link
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config/api.js';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   const response = await fetch("/auth/register", {
+   const response = await fetch(API_BASE_URL + "/auth/register", {
       body: JSON.stringify({
         email: formData.email,
         name: formData.name,
@@ -57,83 +58,112 @@ const RegisterForm = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Paper
-        elevation={3}
+      <Box
         sx={{
-          p: 4,
+          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          mt: 8,
         }}
       >
-        <Typography component="h1" variant="h5">
-          Реєстрація
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Box sx={{ display: "flex", gap: 2 }}>
+        <Paper
+          elevation={3}
+          sx={{
+            padding: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <Typography component="h1" variant="h4" gutterBottom>
+            Sign Up
+          </Typography>
 
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{ mt: 1, width: "100%" }}
+          >
             <TextField
+              margin="normal"
               required
               fullWidth
-              id="name"
-              label="Ім'я"
-              name="name"
-              autoComplete="given-name"
-              value={formData.name}
+              id="firstName"
+              label="First Name"
+              name="firstName"
+              value={formData.firstName}
               onChange={handleChange}
             />
+
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="lastName"
+              label="Last Name"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+            />
+
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              id="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+
+            <Box sx={{ textAlign: "center" }}>
+              <Link
+                onClick={() => navigate("/login")}
+                variant="body2"
+                sx={{ cursor: "pointer" }}
+              >
+                Already have an account? Sign In
+              </Link>
+            </Box>
           </Box>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email"
-            name="email"
-            autoComplete="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Пароль"
-            type="password"
-            id="password"
-            autoComplete="new-password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="confirmPassword"
-            label="Підтвердження паролю"
-            type="password"
-            id="confirmPassword"
-            autoComplete="new-password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Зареєструватися
-          </Button>
-          <Box sx={{ textAlign: "center" }}>
-            <Link component="button" variant="body2" onClick={() => navigate('/login')}>
-              Вже маєте акаунт? Увійти
-            </Link>
-          </Box>
-        </Box>
-      </Paper>
+        </Paper>
+      </Box>
     </Container>
   );
 };
