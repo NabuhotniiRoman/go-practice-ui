@@ -51,8 +51,8 @@ const UserSearch = () => {
 
       if (res.ok) {
         const data = await res.json();
-        setResults(Array.isArray(data) ? data : []);
-        setOpen(true);
+          setResults(data.data);
+          setOpen(true);
       } else {
         setResults([]);
         setOpen(false);
