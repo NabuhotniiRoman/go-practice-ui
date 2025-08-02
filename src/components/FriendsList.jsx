@@ -30,7 +30,11 @@ const FriendsList = () => {
         const res = await fetchWithRefresh("/api/v1/users");
         if (res.ok) {
           const data = await res.json();
-          setFriends(Array.isArray(data) ? data : []);
+          if (data?.data){
+            setFriends(data.data);
+          } else {
+            setFriends(Array.isArray(data) ? data : []);
+          }
         } else {
           console.error("Помилка при отриманні друзів:", await res.text());
         }
