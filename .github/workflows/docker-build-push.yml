@@ -29,7 +29,19 @@ jobs:
         docker push nabuhotnii/react-frontend:${{ github.sha }}
         docker push nabuhotnii/react-frontend:latest
 
-    # Не змінюємо файли - без конфліктів!
+    - name: Update deployment image
+      run: |
+        # Оновлюємо тег образу в deployment файлі
+        sed -i "s|nabuhotnii/react-frontend:.*|nabuhotnii/react-frontend:${{ github.sha }}|g" k8s/react-frontend-deployment.yaml
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add k8s/react-frontend-deployment.yaml
+        git commit -m "Update frontend image to ${{ github.sha }}" || exit 0
+        git push
+
     - name: Success message
       run: |
         echo "✅ Docker images pushed successfully!"
