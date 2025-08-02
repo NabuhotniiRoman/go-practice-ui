@@ -13,7 +13,7 @@ import SendIcon from "@mui/icons-material/Send";
 
 const ChatMock = () => {
   const [messages, setMessages] = useState([
-    { id: 1, text: "Привіт! Я чат для пошуку користувачів." },
+    { id: 1, text: "Привіт! Я чат для пошуку користувачів Юля." },
   ]);
   const [input, setInput] = useState("");
   const listRef = useRef(null);
