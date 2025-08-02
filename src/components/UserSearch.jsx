@@ -51,8 +51,8 @@ const UserSearch = () => {
 
       if (res.ok) {
         const data = await res.json();
-          setResults(data.data);
-          setOpen(true);
+        setResults(data.data);
+        setOpen(true);
       } else {
         setResults([]);
         setOpen(false);
@@ -68,8 +68,28 @@ const UserSearch = () => {
 
   const handleClickAway = () => setOpen(false);
 
-  const handleAddFriend = (user) => alert(`Додати у друзі: ${user.name}`);
-  const handleRemoveFriend = (user) => alert(`Видалити з друзів: ${user.name}`);
+  const handleAddFriend = async (user) => {
+    try {
+      const res = await fetchWithRefresh("/api/v1/friends/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ friend_id: user.id }),
+      });
+
+      if (res.ok) {
+        alert(`✅ Користувача ${user.name} додано в друзі`);
+      } else {
+        const errorData = await res.json();
+        alert(`❌ Помилка: ${errorData.error || "Не вдалося додати в друзі"}`);
+      }
+    } catch (error) {
+      console.error("Add friend error:", error);
+      alert("❌ Внутрішня помилка при додаванні в друзі");
+    }
+  };
+
+  const handleRemoveFriend = (user) =>
+    alert(`Видалити з друзів: ${user.name}`);
   const handleSendMessage = (user) =>
     alert(`Написати повідомлення: ${user.name}`);
 
@@ -121,7 +141,6 @@ const UserSearch = () => {
                       minHeight: 60,
                     }}
                   >
-                    {/* Статус у правому верхньому куті */}
                     <Box
                       sx={{
                         position: "absolute",
@@ -137,7 +156,6 @@ const UserSearch = () => {
                       {user.is_active ? "🟢 Активний" : "🔴 Неактивний"}
                     </Box>
 
-                    {/* Аватар + текст */}
                     <Box
                       sx={{
                         flexGrow: 1,
@@ -178,16 +196,13 @@ const UserSearch = () => {
                               color="text.secondary"
                             >
                               🕒 Створено:{" "}
-                              {new Date(user.created_at).toLocaleString(
-                                "uk-UA"
-                              )}
+                              {new Date(user.created_at).toLocaleString("uk-UA")}
                             </Typography>
                           </>
                         }
                       />
                     </Box>
 
-                    {/* Кнопки справа */}
                     <Box
                       sx={{
                         position: "absolute",
