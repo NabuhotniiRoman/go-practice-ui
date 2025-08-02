@@ -17,7 +17,7 @@ jobs:
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
     - name: Build Docker image
-      run: docker build -t impoer/react-frontend:latest -f ./go-practice-ui/Dockerfile ./go-practice-ui
+      run: docker build -t impoer/react-frontend:latest -f ./Dockerfile .
 
     - name: Push Docker image
       run: docker push impoer/react-frontend:latest
