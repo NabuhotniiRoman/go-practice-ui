@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
       - name: react-frontend
-        image: react-frontend:latest
-        imagePullPolicy: Never
+        image: nabuhotnii/react-frontend:placeholder
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         resources:
