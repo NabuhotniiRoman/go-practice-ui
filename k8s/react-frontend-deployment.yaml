@@ -18,32 +18,32 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2025-08-02T12:57:51Z"
+        kubectl.kubernetes.io/restartedAt: 2025-08-02T14:20:22Z
       labels:
         app: react-frontend
     spec:
       containers:
-      - name: react-frontend
-        image: nabuhotnii/react-frontend:3cb85df072b01b0c538e4d7fcc4f7456f7f3578e
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-        resources:
-          requests:
-            memory: "32Mi"
-            cpu: "25m"
-          limits:
-            memory: "64Mi"
-            cpu: "50m"
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 5
+        - name: react-frontend
+          image: nabuhotnii/react-frontend:5efd886a8ccb5b8723020d2847201bc79fb52560
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "25m"
+            limits:
+              memory: "64Mi"
+              cpu: "50m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
