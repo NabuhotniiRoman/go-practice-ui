@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: react-frontend
-        image: nabuhotnii/react-frontend:1c65500e9e68319aa8e50a947d7571ea340529b4
+        image: nabuhotnii/react-frontend:6fe5bf5a0f0c38a8ef9227696c66d19468028057
         imagePullPolicy: Always
         ports:
         - containerPort: 80
