@@ -18,9 +18,6 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2025-08-02T14:04:29Z"
-    metadata:
-      annotations:
         kubectl.kubernetes.io/restartedAt: "2025-08-02T12:57:51Z"
       labels:
         app: react-frontend
