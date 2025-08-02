@@ -7,6 +7,12 @@ metadata:
     app: react-frontend
 spec:
   replicas: 2
+  revisionHistoryLimit: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: react-frontend
@@ -17,7 +23,7 @@ spec:
     spec:
       containers:
       - name: react-frontend
-        image: nabuhotnii/react-frontend:placeholder
+        image: nabuhotnii/react-frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
