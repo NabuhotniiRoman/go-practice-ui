@@ -29,18 +29,4 @@ jobs:
         docker push nabuhotnii/react-frontend:${{ github.sha }}
         docker push nabuhotnii/react-frontend:latest
 
-    - name: Update Kubernetes deployment
-      run: |
-        sed -i 's|nabuhotnii/react-frontend:.*|nabuhotnii/react-frontend:${{ github.sha }}|' k8s/deployment.yaml
-
-    - name: Commit and push changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add k8s/deployment.yaml
-        if git diff --cached --exit-code; then
-          echo "No changes to commit"
-        else
-          git commit -m "Update image tag to ${{ github.sha }}"
-          git push
-        fi
+    # Залишаємо deployment.yaml незмінним - ArgoCD буде використовувати :latest тег

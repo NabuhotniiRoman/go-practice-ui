@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: react-frontend-image-tag
+  namespace: default
+data:
+  image-tag: "latest"
