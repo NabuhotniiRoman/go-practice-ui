@@ -1,4 +1,4 @@
 // API Configuration
-const API_BASE_URL = 'http://192.168.49.2:30080';  // Використовуємо NodePort для доступу до API
+const API_BASE_URL = 'https://api.example.com';  // Використовуємо HTTPS домен
 
 export default API_BASE_URL;
