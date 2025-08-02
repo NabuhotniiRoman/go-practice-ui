@@ -17,12 +17,15 @@ spec:
       maxUnavailable: 0
   template:
     metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-08-02T12:57:51Z"
+    metadata:
       labels:
         app: react-frontend
     spec:
       containers:
       - name: react-frontend
-        image: nabuhotnii/react-frontend:6fe5bf5a0f0c38a8ef9227696c66d19468028057
+        image: nabuhotnii/react-frontend:f69825e43c100f60d57be8425e3166acc6fe76a6
         imagePullPolicy: Always
         ports:
         - containerPort: 80
