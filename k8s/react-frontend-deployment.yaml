@@ -18,13 +18,13 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/restartedAt: 2025-08-02T14:36:51Z
+        kubectl.kubernetes.io/restartedAt: 2025-08-02T14:39:39Z
       labels:
         app: react-frontend
     spec:
       containers:
         - name: react-frontend
-          image: nabuhotnii/react-frontend:df23b5b6936b19affd9d78f2760f2512088de3db
+          image: nabuhotnii/react-frontend:d8528d34a6fdbfc7f801da4720a57451a99f76cf
           imagePullPolicy: Always
           ports:
             - containerPort: 80
