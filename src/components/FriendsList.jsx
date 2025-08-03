@@ -27,7 +27,7 @@ const FriendsList = () => {
     const fetchFriends = async () => {
       setLoading(true);
       try {
-        const res = await fetchWithRefresh("/api/v1/users");
+        const res = await fetchWithRefresh("/api/v1/friends");
         if (res.ok) {
           const data = await res.json();
           if (data?.data){
